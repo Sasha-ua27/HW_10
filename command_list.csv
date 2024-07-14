@@ -1,0 +1,270 @@
+    1  #!/bin/bash
+    2  set -e
+    3  TARGET=""
+    4  MBR=""
+    5  # Find out which partition or disk are we using
+    6  MYMNT=$(cd -P $(dirname $0) ; pwd)
+    7  while [ "$MYMNT" != "" -a "$MYMNT" != "." -a "$MYMNT" != "/" ]; do    TARGET=$(egrep "[^[:space:]]+[[:space:]]+$MYMNT[[:space:]]+" /proc/mounts | cut -d " " -f 1);    if [ "$TARGET" != "" ]; then break; fi;    MYMNT=$(dirname "$MYMNT"); done
+    8  if [ "$TARGET" = "" ]; then    echo "Can't find device to install to.";    echo "Make sure you run this script from a mounted device.";    exit 1; fi
+    9  if [ "$(cat /proc/mounts | grep "^$TARGET" | grep noexec)" ]; then    echo "The disk $TARGET is mounted with noexec parameter, trying to remount...";    mount -o remount,exec "$TARGET"; fi
+   10  MBR=$(echo "$TARGET" | sed -r "s/[0-9]+\$//g")
+   11  NUM=${TARGET:${#MBR}}
+   12  cd "$MYMNT"
+   13  clear
+   14  echo "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
+   15  echo "                        Welcome to Slax boot installer                         "
+   16  echo "-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-"
+   17  echo
+   18  echo "This installer will setup disk $TARGET to boot only Slax."
+   19  if [ "$MBR" != "$TARGET" ]; then    echo;    echo "Warning! Master boot record (MBR) of $MBR will be overwritten.";    echo "If you use $MBR to boot any existing operating system, it will not work";    echo "anymore. Only Slax will boot from this device. Be careful!"; fi
+   20  echo
+   21  echo "Press any key to continue, or Ctrl+C to abort..."
+   22  read junk
+   23  clear
+   24  echo "Flushing filesystem buffers, this may take a while..."
+   25  sync
+   26  # setup MBR if the device is not in superfloppy format
+   27  if [ "$MBR" != "$TARGET" ]; then    echo "Setting up MBR on $MBR...";    ./boot/syslinux/lilo -S /dev/null -M $MBR ext # this must be here to support -A for extended partitions
+   28     echo "Activating partition $TARGET...";    ./boot/syslinux/lilo -S /dev/null -A $MBR $NUM;    echo "Updating MBR on $MBR..." # this must be here because LILO mbr is bad. mbr.bin is from syslinux
+   29     cat ./boot/syslinux/mbr.bin > $MBR; fi
+   30  echo "Setting up boot record for $TARGET..."
+   31  ./boot/syslinux/syslinux -d boot/syslinux $TARGET
+   32  ls
+   33  pwd
+   34  here
+   35  date
+   36  cd C:\Users\Oleksandr\Desktop\GIT\HW_10
+   37  cd C:/Users/Oleksandr/Desktop/GIT
+   38  clear
+   39  git clone git@github.com:Sasha-ua27/HW_10.git
+   40  cd C:/Users/Oleksandr/Desktop/GIT/HW_10
+   41  touch text_ignore.txt
+   42  nano .gitignore.txt
+   43  nano .gitignore
+   44  git status text_ignore.txt
+   45  git add. text_ignore.txt
+   46  add. text_ignore.txt
+   47  add text_ignore.txt
+   48  git add. text_ignore.txt
+   49  git add text_ignore.txt
+   50  git add -f text_ignore.txt
+   51  commit
+   52  git commit -m "Modefidet"
+   53  touch main_test.txt
+   54  git add -f main_test.txt
+   55  commit -m "Main-Test change"
+   56  git commit -m "Main-Test change"
+   57  [200~git checkout -b develop~
+   58  git checkout -b develop
+   59  touch develop_test.txt
+   60  git add develop_test.txt
+   61  nano develop_test.txt
+   62  git status develop_test.txt
+   63  git add develop_test.txt
+   64  git commit
+   65  cd C:/Users/Oleksandr/Desktop/GIT
+   66  git clone git@github.com:Sasha-ua27/HW_10.git
+   67  cd C:/Users/Oleksandr/Desktop/GIT/HW_10
+   68  touch text_ignore.txt
+   69  nano .gitignore.txt
+   70  nano .gitignore
+   71  git status text_ignore.txt
+   72  git add text_ignore.txt
+   73  git status text_ignore.txt
+   74  git add text_ignore.txt
+   75  git commit
+   76  touch main_test.txt
+   77  git add touch main_test.txt
+   78  git add main_test.txt
+   79  git commit
+   80  cd C:/Users/Oleksandr/Desktop/GIT/HW_10
+   81  cd C:/Users/Oleksandr/Desktop/GIT
+   82  claer
+   83  clear
+   84  git clone git@github.com:Sasha-ua27/HW_10.git
+   85  cd C:/Users/Oleksandr/Desktop/GIT/HW_10
+   86  touch text_ignore.txt
+   87  nano .gitignore
+   88  git status text_ignore.txt
+   89  git add text_ignore.txt
+   90  git add -f text_ignore.txt
+   91  git status text_ignore.txt
+   92  git commit -m "New file add"
+   93  touch main_test.txt
+   94  git add main_test.txt
+   95  git commit
+   96  cd C:/Users/Oleksandr/Desktop/GIT
+   97  git clone git@github.com:Sasha-ua27/HW_10.git
+   98  cd C:/Users/Oleksandr/Desktop/GIT/HW_10
+   99  touch text_ignore.txt
+  100  nano .gitignore
+  101  nano .gitignore
+  102  git add.
+  103  git status
+  104  git add.
+  105  git add text_ignore.txt
+  106  git add text_ignore
+  107  git add HW_10
+  108  cd C:/Users/Oleksandr/Desktop/GIT
+  109  cd C:/Users/Oleksandr/Desktop/GIT
+  110  git clone git@github.com:Sasha-ua27/HW_10.git
+  111  cd C:/Users/Oleksandr/Desktop/GIT/HW_10
+  112  touch text_ignore.txt
+  113  nano .gitignore
+  114  git status
+  115  git add.
+  116  git add text_ignore.txt
+  117  git add -f text_ignore.txt
+  118  git commit -m "added new File text_ignore.txt"
+  119  touch main_test.txt
+  120  git add main_test.txt
+  121  git commit -m "added new File main_test.txt"
+  122  cd C:/Users/Oleksandr/Desktop/GIT
+  123  git clone git@github.com:Sasha-ua27/HW_10.git
+  124  cd C:/Users/Oleksandr/Desktop/GIT/HW_10
+  125  touch text_ignore.txt
+  126  nano .gitignore
+  127  git ststus
+  128  git status
+  129  git add.
+  130  git add
+  131  git add .
+  132  git status
+  133  git commit
+  134  cd C:/Users/Oleksandr/Desktop/GIT
+  135  git clone git@github.com:Sasha-ua27/HW_10.git
+  136  cd C:/Users/Oleksandr/Desktop/GIT/HW_10
+  137  touch text_ignore.txt
+  138  nano .gitignore
+  139  git status
+  140  git add .
+  141  git commit -m "add text_ignore"
+  142  touch main_test.txt
+  143  git add .
+  144  git commit -m "add main_test.txt"
+  145  git checkout -b develop
+  146  touch develop_test.txt
+  147  git add .
+  148  nano develop_test.txt
+  149  git status
+  150  git add .
+  151  git commit -m "added & edit develop_test.txt"
+  152  git checkout main
+  153  git merge
+  154  merge branch develop
+  155  git merge branch develop
+  156  git merge develop
+  157  git log
+  158  cd C:/Users/Oleksandr/Desktop/GIT
+  159  git clone git@github.com:Sasha-ua27/HW_10.git
+  160  cd C:/Users/Oleksandr/Desktop/GIT/HW_10
+  161  touch text_ignore.txt
+  162  nano .gitignore
+  163  git status
+  164  git add .
+  165  git commit -m "add text_ignore"
+  166  touch main_test.txt
+  167  git add .
+  168  git commit -m "add main_test.txt"
+  169  git checkout -b develop
+  170  touch develop_test.txt
+  171  git add .
+  172  nano develop_test.txt
+  173  git status
+  174  git add .
+  175  git commit -m "added & edit develop_test.txt"
+  176  git checkout main
+  177  git merge develop
+  178  git log
+  179  cd C:/Users/Oleksandr/Desktop/GIT
+  180  git clone git@github.com:Sasha-ua27/HW_10.git
+  181  cd C:/Users/Oleksandr/Desktop/GIT/HW_10
+  182  touch text_ignore.txt
+  183  nano .gitignore
+  184  git status
+  185  git add .
+  186  git commit -m "add text_ignore"
+  187  touch main_test.txt
+  188  git add .
+  189  git commit -m "add main_test.txt"
+  190  git checkout -b develop
+  191  touch develop_test.txt
+  192  git add .
+  193  nano develop_test.txt
+  194  git status
+  195  git add .
+  196  git commit -m "added & edit develop_test.txt"
+  197  git checkout main
+  198  git merge develop
+  199  git log
+  200  history > command_list.csv
+  201  git add .
+  202  git commit -m "final edit"
+  203  git push
+  204  cd C:/Users/Oleksandr/Desktop/GIT
+  205  git clone HW_10
+  206  git clone HW_10
+  207  git clone HW_10.git
+  208  git clone HW_10
+  209  git clone HW_10
+  210  cd C:/Users/Oleksandr/Desktop/GIT
+  211  git clone HW_10
+  212  git clone HW_10 https://github.com/Sasha-ua27/HW_10.git
+  213  git clone https://github.com/Sasha-ua27/HW_10.git
+  214  git remote add origin
+  215  git remote add origin [200~https://github.com/Sasha-ua27/HW_10.git~
+  216  git remote add origin https://github.com/Sasha-ua27/HW_10.git
+  217  git remote add origin git@github.com:Sasha-ua27/HW_10.git
+  218  git remote add origin git@github.com:Sasha-ua27/HW_1.git
+  219  cd C:/Users/Oleksandr/Desktop/GIT
+  220  git clone https://github.com/Sasha-ua27/HW_10.git
+  221  git clone HW_10
+  222  cd C:/Users/Oleksandr/Desktop/GIT
+  223  git clone HW_10 https://github.com/Sasha-ua27/HW_10.git
+  224  git clone https://github.com/Sasha-ua27/HW_10.git
+  225  cd C:/Users/Oleksandr/Desktop/GIT/HW_10
+  226  touch text_ignore.txt
+  227  nano .gitignore
+  228  [200~git status~git statusgit statusgit status
+  229  git status
+  230  git add .
+  231  git commit -m "add text_ignore"
+  232  touch main_test.txt
+  233  git add .
+  234  git commit -m "add main_test.txt"
+  235  git checkout -b develop
+  236  git add .
+  237  nano develop_test.txt
+  238  git status
+  239  git add .
+  240  git commit -m "added & edit develop_test.txt"
+  241  git checkout main
+  242  git merge develop
+  243  git log
+  244  history > command_list.csv
+  245  git add .
+  246  git commit -m "final version'
+  247  git push
+  248  git push
+  249  cd C:/Users/Oleksandr/Desktop/GIT
+  250  git clone https://github.com/Sasha-ua27/HW_10.git
+  251  cd C:/Users/Oleksandr/Desktop/GIT/HW_10
+  252  touch text_ignore.txt
+  253  nano .gitignore
+  254  git status
+  255  git add .
+  256  git commit -m "add text_ignore"
+  257  touch main_test.txt
+  258  git add .
+  259  git commit -m "add main_test.txt"
+  260  git checkout -b develop
+  261  touch develop_test.txt
+  262  git add .
+  263  nano develop_test.txt
+  264  git status
+  265  git add .
+  266  git commit -m "added & edit develop_test.txt"
+  267  git checkout main
+  268  git merge develop
+  269  git log
+  270  history > command_list.csv
